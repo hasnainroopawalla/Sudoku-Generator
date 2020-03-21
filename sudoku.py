@@ -1,4 +1,11 @@
 import random
+import time
+
+def saveboard(board):
+    with open('generated-boards.txt', 'a') as f:
+        for item in board:
+            f.write("%s\n" % item)
+        f.write('\n\n')
 
 def display(a):
     print()
@@ -88,7 +95,6 @@ def getsquares(a):
     return s1,s2,s3,s4,s5,s6,s7,s8,s9
     
 def generateboard(l):
-    b = [[3,2,9,5,4,7,6,1,8]]
     
     b =  [[0,0,0,0,0,0,0,0,0],
           [0,0,0,0,0,0,0,0,0],
@@ -100,16 +106,6 @@ def generateboard(l):
           [0,0,0,0,0,0,0,0,0],
           [0,0,0,0,0,0,0,0,0]]
 
-##    b = [[3,2,9,5,4,7,6,1,8],
-##        [6,5,8,9,1,3,4,2,7],
-##         [4,1,7,2,8,6,9,5,3],
-##         [9,7,3,1,5,2,8,4,6],
-##         [5,6,2,8,7,4,3,9,1],
-##         [8,4,1,6,3,9,2,7,5],
-##         [1,9,4,3,6,5,7,8,2],
-##         [7,3,5,4,2,8,1,6,9],
-##         [2,8,6,7,9,1,5,3,4]]
-    
     c = 0
     while c!=9:
         temp = []
@@ -122,7 +118,7 @@ def generateboard(l):
             print(c+1,rancount)
             print(temp)
             
-            if rancount==50:
+            if rancount==50:   # Threshold = 50; Generate row again
                 temp=[]
                 rancount = 0
                 
@@ -174,7 +170,6 @@ def generateboard(l):
                 
         b[c]=temp
         c+=1
-        #s1,s2,s3,s4,s5,s6,s7,s8,s9 = getsquares(b)
         
     return b
 
@@ -182,21 +177,12 @@ def generateboard(l):
 
 l = {1,2,3,4,5,6,7,8,9}
 
-a = [[3,2,9,5,4,7,6,1,8],
-     [6,5,8,9,1,3,4,2,7],
-     [4,1,7,2,8,6,9,5,3],
-     [9,7,3,1,5,2,8,4,6],
-     [5,6,2,8,7,4,3,9,1],
-     [8,4,1,6,3,9,2,7,5],
-     [1,9,4,3,6,5,7,8,2],
-     [7,3,5,4,2,8,1,6,9],
-     [2,8,6,7,9,1,5,3,4]]
-
+start = time.time()
 
 board = generateboard(l)
 display(board)
+saveboard(board)
 
-with open('board.txt', 'a') as f:
-    for item in board:
-        f.write('\n\n')
-        f.write("%s\n" % item)
+end = time.time()
+
+print('Time taken:',round(end-start,2),'seconds')
