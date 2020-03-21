@@ -173,7 +173,8 @@ def generateboard(l):
         
     return b
 
-    
+def question(difficulty):
+    print(difficulty)
 
 l = {1,2,3,4,5,6,7,8,9}
 
@@ -186,3 +187,8 @@ saveboard(board)
 end = time.time()
 
 print('Time taken:',round(end-start,2),'seconds')
+
+difficulty = 'Easy'
+print('Puzzle:')
+
+question(difficulty)
