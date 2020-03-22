@@ -98,7 +98,7 @@ def generateboard(l):
     
     b =  [[0,0,0,0,0,0,0,0,0],
           [0,0,0,0,0,0,0,0,0],
-          [0,0,0,0,0,0,0,0,0],
+          [0,4,9,0,0,0,0,0,0],
           [0,0,0,0,0,0,0,0,0],
           [0,0,0,0,0,0,0,0,0],
           [0,0,0,0,0,0,0,0,0],
@@ -106,18 +106,37 @@ def generateboard(l):
           [0,0,0,0,0,0,0,0,0],
           [0,0,0,0,0,0,0,0,0]]
 
+
+##    b = [[7, 5, 2, 9, 8, 4, 1, 3, 6],
+##         [3, 1, 8, 6, 5, 2, 4, 9, 7],
+##         [6, 4, 9, 1, 7, 3, 5, 2, 8],
+##         [8, 2, 7, 5, 3, 9, 6, 1, 4],
+##         [1, 6, 3, 7, 4, 8, 2, 5, 9],
+##         [5, 9, 4, 2, 1, 6, 8, 7, 3],
+##         [9, 7, 5, 8, 6, 1, 3, 4, 2],
+##         [2, 3, 6, 4, 9, 5, 7, 8, 1],
+##         [4, 8, 1, 3, 2, 7, 9, 6, 5]]
+
     c = 0
     while c!=9:
+        n = 0
         temp = []
         flag = 0
         rancount = 0
-        
-        while flag==0:
+        #print(c)
+        while flag==0:  # To check if row is complete
+            n+=1
+            #print(c,n,temp)
+            if(b[c][len(temp)]!=0):
+                temp.append(b[c][len(temp)])
+                continue
             num = random.randrange(1,10)
             rancount+=1
-          
+        
             
             if rancount==50:   # Threshold = 50; Generate row again     
+                #print(temp)
+                random.seed(time.time())
                 temp = []       
                 rancount = 0
                 
@@ -125,7 +144,7 @@ def generateboard(l):
                 cflag = 0
                 for i in range(len(b)):
                     if b[i][len(temp)]==num:
-                        cflag = 1
+                        cflag = 1                   
                         break
 
                 if cflag==0:
