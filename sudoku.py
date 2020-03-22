@@ -100,7 +100,7 @@ def generateboard(l):
           [0,0,0,0,0,0,0,0,0],
           [0,0,0,0,0,0,0,0,0],
           [0,0,0,0,0,0,0,0,0],
-          [0,0,0,0,1,0,0,0,0],
+          [0,0,0,0,0,0,0,0,0],
           [0,0,0,0,0,0,0,0,0],
           [0,0,0,0,0,0,0,0,0],
           [0,0,0,0,0,0,0,0,0],
@@ -115,11 +115,10 @@ def generateboard(l):
         while flag==0:
             num = random.randrange(1,10)
             rancount+=1
-            print(c+1,rancount)
-            print(temp)
+          
             
-            if rancount==50:   # Threshold = 50; Generate row again
-                temp=[]
+            if rancount==50:   # Threshold = 50; Generate row again     
+                temp = []       
                 rancount = 0
                 
             if not num in temp:
@@ -170,7 +169,6 @@ def generateboard(l):
                 
         b[c]=temp
         c+=1
-        
     return b
 
 def question(difficulty):
@@ -186,9 +184,8 @@ saveboard(board)
 
 end = time.time()
 
-print('Time taken:',round(end-start,2),'seconds')
+print('Time to generate:',round(end-start,2),'seconds')
 
-difficulty = 'Easy'
-print('Puzzle:')
-
-question(difficulty)
+#difficulty = 'Easy'
+#print('Puzzle:')
+#question(difficulty)
