@@ -124,7 +124,6 @@ def generateboard(l):
             if not num in temp:
                 cflag = 0
                 for i in range(len(b)):
-                    #print(b[i][len(temp)])
                     if b[i][len(temp)]==num:
                         cflag = 1
                         break
