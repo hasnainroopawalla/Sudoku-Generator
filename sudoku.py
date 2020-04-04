@@ -1,5 +1,6 @@
 import random
 import time
+import solver
 
 def saveboard(board):
     with open('generated-boards.txt', 'a') as f:
@@ -15,7 +16,10 @@ def display(a):
         for j in range(len(a[i])):
             if j%3==0 and j!=0:
                 print('|', end =" ")
-            print(a[i][j], end =" ")
+            if a[i][j]!=0:
+                print(a[i][j], end =" ")
+            else:
+                print(' ', end =" ")
         print()
     print()
 
@@ -39,7 +43,7 @@ def checkboard(a, l):
             colflag = 1
             break
         
-    if rowflag==1 or colflag==1 or not checksquares(a):
+    if rowflag==1 or colflag==1:
         return False
     else:
         return True
@@ -189,21 +193,42 @@ def generateboard(l):
         c+=1
     return b
 
-def question(difficulty):
-    print(difficulty)
+def question(grid, difficulty):
+    if difficulty==1:
+        clear = [4,5,6] # clear 4,5,6 values per row
+    elif difficulty==2:
+        clear = [5,6]
+    else:
+        clear = [6,7]
+
+    for i in range(len(grid)):
+        numclear = random.choice(clear)
+        clearflag = 0
+
+        while clearflag!=numclear:
+            element = random.choice(grid[i])
+            if element != 0:
+                grid[i][grid[i].index(element)] = 0
+                clearflag+=1
+
+    return grid
 
 l = {1,2,3,4,5,6,7,8,9}
 
 start = time.time()
-
 board = generateboard(l)
 display(board)
 saveboard(board)
-
 end = time.time()
-
 print('Time to generate:',round(end-start,2),'seconds')
 
-#difficulty = 'Easy'
-#print('Puzzle:')
-#question(difficulty)
+
+difficulty = int(input('1- Easy\n2- Medium\n3- Hard\n'))
+print('Puzzle:')
+qstn = question(board,difficulty)
+display(qstn)
+
+if input('Press s to solve: ')=='s':
+    ans = solver.solve(qstn)
+    display(ans)
+
